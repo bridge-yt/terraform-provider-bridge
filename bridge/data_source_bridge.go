@@ -24,11 +24,11 @@ func dataSourceBridgeValue() *schema.Resource {
 			},
 			"arn": {
 				Type:     schema.TypeString,
-				Computed: true,
+				Computed: false,
 			},
 			"resource_type": {
 				Type:     schema.TypeString,
-				Computed: true,
+				Computed: false,
 			},
 		},
 	}
