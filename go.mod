@@ -1,4 +1,4 @@
-module terraform-provider-bridge
+module github.com/bridge-yt/terraform-provider-bridge
 
 go 1.22.0
 
