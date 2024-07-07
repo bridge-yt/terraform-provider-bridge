@@ -33,11 +33,11 @@ func resourceBridgeOutput() *schema.Resource {
 			},
 			"arn": {
 				Type:     schema.TypeString,
-				Required: true,
+				Required: false,
 			},
 			"resource_type": {
 				Type:     schema.TypeString,
-				Required: true,
+				Required: false,
 			},
 			"bridge_register": {
 				Type:     schema.TypeBool,
