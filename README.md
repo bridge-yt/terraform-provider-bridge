@@ -70,7 +70,7 @@ This example demonstrates how to use the Bridge provider to retrieve data:
 terraform {
   required_providers {
     bridge = {
-      source  = "bridge-yt/bridge"
+      source  = "Helm-bridge-plugin-yt/Helm-bridge-plugin"
       version = "1.0.0"
     }
   }
@@ -191,7 +191,7 @@ This example demonstrates how to use the Bridge provider to retrieve data:
 terraform {
   required_providers {
     bridge = {
-      source  = "bridge-yt/bridge"
+      source  = "Helm-bridge-plugin-yt/Helm-bridge-plugin"
       version = "1.0.0"
     }
   }
@@ -223,13 +223,13 @@ Clone the repository and navigate to the provider directory:
 
 ```bash
 git clone https://github.com/bridge-yt/terraform-provider-bridge.git
-cd terraform-provider-bridge
+cd terraform-provider-Helm-bridge-plugin
 ```
 
 Build the provider:
 
 ```bash
-go build -o terraform-provider-bridge
+go build -o terraform-provider-Helm-bridge-plugin
 ```
 
 ### Testing the Provider Locally
@@ -240,7 +240,7 @@ To test the provider locally, create a Terraform configuration that uses the loc
 terraform {
   required_providers {
     bridge = {
-      source = "local/bridge"
+      source = "local/Helm-bridge-plugin"
       version = "1.0.0"
     }
   }

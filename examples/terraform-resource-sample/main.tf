@@ -13,14 +13,13 @@ resource "null_resource" "mock_vpc" {
 }
 
 resource "bridge_output" "vpc_id" {
+  namespace       = "production"
   bridge_name     = "prod_vpc_id"
   value           = local.mock_vpc_id
-  arn             = "arn:aws:ec2:region:account-id:vpc/vpc-id"
   resource_type   = "vpc"
   bridge_register = true
 }
 
-
 output "vpc_test" {
-  value = bridge.prod_vpc_id.value
+  value = bridge_output.vpc_id.value
 }

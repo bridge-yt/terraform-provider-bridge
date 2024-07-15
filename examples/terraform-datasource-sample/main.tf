@@ -3,7 +3,8 @@ provider "bridge" {
 }
 
 data "bridge_value" "prod_vpc_id" {
-  name = "prod_vpc_id"
+  namespace = "production"
+  name      = "prod_vpc_id"
 }
 
 output "vpc_test" {

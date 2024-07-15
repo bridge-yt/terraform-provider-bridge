@@ -1,3 +1,4 @@
+// resource_bridge.go
 package bridge
 
 import (
@@ -23,6 +24,10 @@ type OutputResource struct {
 func resourceBridgeOutput() *schema.Resource {
 	return &schema.Resource{
 		Schema: map[string]*schema.Schema{
+			"namespace": {
+				Type:     schema.TypeString,
+				Required: true,
+			},
 			"bridge_name": {
 				Type:     schema.TypeString,
 				Required: true,
@@ -33,11 +38,11 @@ func resourceBridgeOutput() *schema.Resource {
 			},
 			"arn": {
 				Type:     schema.TypeString,
-				Required: false,
+				Required: true,
 			},
 			"resource_type": {
 				Type:     schema.TypeString,
-				Required: false,
+				Required: true,
 			},
 			"bridge_register": {
 				Type:     schema.TypeBool,
@@ -56,6 +61,7 @@ func resourceBridgeOutput() *schema.Resource {
 func resourceBridgeOutputCreate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	providerMeta := meta.(map[string]interface{})
 	apiURL := providerMeta["api_url"].(string)
+	namespace := d.Get("namespace").(string)
 
 	if !d.Get("bridge_register").(bool) {
 		return nil // Exit early if registration is disabled
@@ -72,7 +78,7 @@ func resourceBridgeOutputCreate(ctx context.Context, d *schema.ResourceData, met
 		return diag.FromErr(err)
 	}
 
-	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("%s/resource", apiURL), bytes.NewBuffer(resourceData))
+	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("%s/resource/%s", apiURL, namespace), bytes.NewBuffer(resourceData))
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -101,10 +107,11 @@ func resourceBridgeOutputCreate(ctx context.Context, d *schema.ResourceData, met
 func resourceBridgeOutputRead(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	providerMeta := meta.(map[string]interface{})
 	apiURL := providerMeta["api_url"].(string)
+	namespace := d.Get("namespace").(string)
 
 	name := d.Id() // Get the resource name from the ID
 
-	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/resource/%s", apiURL, name), nil)
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/resource/%s/%s", apiURL, namespace, name), nil)
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -139,6 +146,7 @@ func resourceBridgeOutputRead(ctx context.Context, d *schema.ResourceData, meta 
 func resourceBridgeOutputUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	providerMeta := meta.(map[string]interface{})
 	apiURL := providerMeta["api_url"].(string)
+	namespace := d.Get("namespace").(string)
 
 	name := d.Get("bridge_name").(string)
 	value := d.Get("value").(string)
@@ -151,7 +159,7 @@ func resourceBridgeOutputUpdate(ctx context.Context, d *schema.ResourceData, met
 		return diag.FromErr(err)
 	}
 
-	req, err := http.NewRequest(http.MethodPut, fmt.Sprintf("%s/resource/%s", apiURL, name), bytes.NewBuffer(resourceData))
+	req, err := http.NewRequest(http.MethodPut, fmt.Sprintf("%s/resource/%s/%s", apiURL, namespace, name), bytes.NewBuffer(resourceData))
 	if err != nil {
 		return diag.FromErr(err)
 	}
@@ -180,9 +188,10 @@ func resourceBridgeOutputUpdate(ctx context.Context, d *schema.ResourceData, met
 func resourceBridgeOutputDelete(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	providerMeta := meta.(map[string]interface{})
 	apiURL := providerMeta["api_url"].(string)
+	namespace := d.Get("namespace").(string)
 	name := d.Id()
 
-	req, err := http.NewRequest(http.MethodDelete, fmt.Sprintf("%s/resource/%s", apiURL, name), nil)
+	req, err := http.NewRequest(http.MethodDelete, fmt.Sprintf("%s/resource/%s/%s", apiURL, namespace, name), nil)
 	if err != nil {
 		return diag.FromErr(err)
 	}

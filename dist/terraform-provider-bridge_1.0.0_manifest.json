@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "metadata": {
+    "protocol_versions": ["5.0"]
+  },
+  "provider": {
+    "name": "bridge",
+    "version": "1.0.0",
+    "platforms": [
+      { "os": "linux", "arch": "amd64" },
+      { "os": "linux", "arch": "arm64" },
+      { "os": "darwin", "arch": "amd64" },
+      { "os": "darwin", "arch": "arm64" },
+      { "os": "windows", "arch": "amd64" }
+    ]
+  }
+}
