@@ -1,4 +1,3 @@
-Sure, here's a comprehensive `README.md` with all necessary information, examples, and instructions included in one file:
 
 ```markdown
 # Terraform Provider Bridge
