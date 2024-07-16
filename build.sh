@@ -80,7 +80,7 @@ if [ -d "${OUTPUT_DIR}" ]; then
   echo "Generating SHA256SUMS file at ${SHA256SUMS_FILE}..."
 
   # Use absolute path to the output directory when running shasum
-  (cd "${OUTPUT_DIR}" && shasum -a 256 *zip "${MANIFEST_FILE}" > "${SHA256SUMS_FILE}")
+  (cd "${OUTPUT_DIR}" && shasum -a 256 *.* "${MANIFEST_FILE}" > "${SHA256SUMS_FILE}")
 
   # Debug: check if SHA256SUMS file was created
   if [ -f "${SHA256SUMS_FILE}" ]; then
