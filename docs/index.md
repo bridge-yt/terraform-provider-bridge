@@ -44,9 +44,9 @@ output "example_value" {
 ### Resource `bridge_resource`
 - **namespace**: (Required) The namespace to which the resource belongs.
 - **bridge_name**: (Required) The unique name of the resource.
-- **value**: (Required) The value of the resource.
-- **arn**: (Required) The ARN of the resource.
-- **resource_type**: (Required) The type of the resource.
+- **value**: (Optional) The value of the resource.
+- **arn**: (Optional) The ARN of the resource.
+- **resource_type**: (Optional) The type of the resource.
 - **bridge_register**: (Optional) Whether to register the resource with Bridge.
 
 ### Data Source `bridge_value`
