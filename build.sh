@@ -51,6 +51,10 @@ MANIFEST_FILE="${OUTPUT_DIR}/terraform-provider-${PROVIDER_NAME}_${VERSION}_mani
 echo "Generating manifest file..."
 cat <<EOL > "${MANIFEST_FILE}"
 {
+  "version": 1,
+  "metadata": {
+    "protocol_versions": ["5.0"]
+  },
   "provider": {
     "name": "${PROVIDER_NAME}",
     "version": "${VERSION}",
